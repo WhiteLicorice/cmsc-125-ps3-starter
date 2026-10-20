@@ -77,8 +77,10 @@ assesses the joint analysis and the collaboration history.
 ## The First Run
 
 A fresh clone builds without warnings. It passes 13 of the 39 cases and exits
-1. The 13 passing cases test invalid input. They need no completed module: the
-stubs return failure as required.
+1. The same run reports 2 of the 5 invariant checks passed. The two paper
+traces pass. The three program checks wait for your modules. The 13 passing
+cases test invalid input. They need no completed module. The stubs return
+failure as required.
 
 The other 26 cases need `src/counter.c`, `src/buffer.c`, and `src/deadlock.c`.
 The workflow in the Actions tab is red for the same reason. That state is
@@ -158,7 +160,7 @@ The one case your pair writes lives under `student-cases/`. That folder holds a
 short README and an example in the same form. Run it with
 `./check.sh student-cases`.
 
-The five legacy private checks are now public at `tools/private_checks.py`.
-They validate the reference and are not part of your grade. After your build,
-run them with `python3 tools/private_checks.py .`.
+`check.sh` runs the five invariant checks after the public cases. They cover the
+two paper traces, the counter stress run, and both lock-order results. The
+checks are part of the same command, so no hidden suite exists.
 

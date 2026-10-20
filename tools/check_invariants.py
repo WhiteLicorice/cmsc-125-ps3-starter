@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Legacy private checks, now published. They validate the reference and are not part of the student's grade."""
+"""Check the invariants outside the published case corpus.
+
+`check.sh` runs these checks after the public cases. Each one exercises a claim
+that the case corpus cannot state on its own:
+
+1. The lost-update paper trace follows the model and ends at x=1.
+2. The mutex paper trace follows the model and ends at x=2.
+3. Four workers with 100,000 increments each report a total of 400000.
+4. An acyclic lock order reports no cycle.
+5. A cyclic lock order reports a cycle.
+"""
 
 from pathlib import Path
 import subprocess
@@ -42,7 +52,7 @@ def main() -> int:
         failures.append("cyclic lock order was missed")
     for failure in failures:
         print(f"FAIL {failure}")
-    print(f"{checks - len(failures)}/{checks} private checks passed")
+    print(f"{checks - len(failures)}/{checks} invariant checks passed")
     return 1 if failures else 0
 
 

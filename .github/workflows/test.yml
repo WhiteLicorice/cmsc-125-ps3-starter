@@ -3,7 +3,7 @@ on: [push]
 
 # This workflow is red before the work is done, and that is the correct
 # starting state. The starter ships three unimplemented modules, so it passes
-# 13 of the 39 published cases and exits 1. The passing 13 are the invalid-input
+# 13 of the 39 published cases, reports 2 of 5 invariant checks, and exits 1. The passing 13 are the invalid-input
 # cases, which the failure stubs answer correctly.
 #
 # The workflow must be green on the commit you submit. That commit holds one
