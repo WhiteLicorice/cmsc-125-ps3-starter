@@ -158,3 +158,7 @@ The one case your pair writes lives under `student-cases/`. That folder holds a
 short README and an example in the same form. Run it with
 `./check.sh student-cases`.
 
+The five legacy private checks are now public at `tools/private_checks.py`.
+They validate the reference and are not part of your grade. After your build,
+run them with `python3 tools/private_checks.py .`.
+
