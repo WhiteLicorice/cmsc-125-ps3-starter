@@ -1,45 +1,160 @@
+<!--no-pdf-->
 # CMSC 125 Problem Set 3 Starter
 
-This repository holds a POSIX threads exercise. Complete the TODO blocks in `src/counter.c`, `src/buffer.c`, and `src/deadlock.c`. Keep the public interface and cases unchanged.
+This C17 project is the starter for the CMSC 125 Problem Set 3 concurrent
+queue and lock-order graph. A counter measures lost updates. A bounded queue
+carries items between producers and consumers through a condition variable or
+POSIX semaphores. A lock-order graph reports whether a cycle can stop every
+thread. This README gives the repository map, the commands, the starting state,
+and the three host routes.
 
-## Requirements
+This project runs on Linux, on macOS, and on Windows through WSL2 Ubuntu. It
+uses POSIX threads and, on macOS, named POSIX semaphores.
 
-The project uses C17, POSIX threads, Make, Git, and Python 3.9 or newer. It has no third-party package dependencies.
+## Pair
 
-## Build and Run
+Enter two names below. An assigned trio adds one entry.
 
-On Linux, install the compiler and tools with `sudo apt install build-essential make git python3`.
+- Full Name (`@github-username`)
+- Full Name (`@github-username`)
 
-On macOS, install the Xcode command line tools with `xcode-select --install`. Install Python with `brew install python` if your version is older than 3.9.
+## Files You May Change
 
-On Windows, install WSL2 Ubuntu from PowerShell with `wsl --install -d Ubuntu`. Then install the Linux tools inside Ubuntu.
+You may change only these files and folders:
 
-Run these commands on Linux, native macOS, or WSL2 Ubuntu:
+- `src/counter.c`
+- `src/buffer.c`
+- `src/deadlock.c`
+- `ANALYSIS.md`, which you create
+- The Pair section of `README.md`
+- `student-cases/`, which holds the one case of your own
 
-```sh
-make
-./run cases/mutex.case
-./check.sh
+Everything else is fixed. `include/ps3.h` and `src/main.c` are given to you
+complete. `cases/`, `tools/check_cases.py`, and the workflow are the grading
+corpus and its runner. The manual states every rule these files follow.
+
+## Layout
+
+```
+include/ps3.h         fixed interface: limits, structures, prototypes
+src/main.c            complete: the case reader, the command line, the exit codes
+src/counter.c         yours: the shared counter and the lost-update measurement
+src/buffer.c          yours: the bounded queue, the condition variable, the semaphores
+src/deadlock.c        yours: the lock-order graph cycle search
+cases/                the complete public corpus
+student-cases/        the one boundary or failure case of your own
+tools/check_cases.py  the runner that grades the corpus
+ANALYSIS.md           the joint analysis that you create
+Makefile run check.sh  the run contract
 ```
 
-The starter builds with failure stubs. Its public check reports `13/39 cases passed` and exits 1 until you complete the modules. The invalid-input cases pass because the stubs return failure as required.
+## Commands
 
-The TODO comments split the implementation into reviewable tasks. Each comment marks one task in a worker, queue operation, or graph search.
+```bash
+make                      # build build/ps3
+make clean                # remove the build directory
+./run cases/mutex.case
+./run counter 4 100000
+./check.sh                # build, then run every published case in cases/
+./check.sh student-cases  # build, then run the cases in student-cases/
+```
 
-Run a counter measurement with `time ./run counter 4 100000`. The program prints the total. The shell prints elapsed time.
+`./run` passes its arguments to the binary. It accepts one case file, or
+`counter WORKERS INCREMENTS` for a direct measurement.
 
-The semaphore implementation uses named POSIX semaphores on macOS. The interface keeps that platform choice inside `src/buffer.c`.
+`check.sh` is the complete public automated check. No hidden suite exists. Read
+`tools/check_cases.py` before you trust a green run. The rubric separately
+assesses the joint analysis and the collaboration history.
 
-## Cases
+## Exit Codes
 
-`cases/` holds 39 exact-output cases. They check the counter limits, both queue paths, queue boundaries, and lock-order graph boundaries. Valid cases have an `.out` file and require exit code zero with empty standard error. Invalid cases also have `.status` and `.err` files. The checker compares all three results byte for byte and stops a case after 15 seconds.
+| Code | Meaning |
+|---|---|
+| 0 | The case ran and every check in it passed. |
+| 1 | A case check failed, or the case content was refused. |
+| 2 | The command line or the case file path was refused. |
 
-Several cases apply the same producer and consumer workload to both queue implementations, so their exact counts and sums can be compared under identical inputs.
+## The First Run
 
-## The Pair
+A fresh clone builds without warnings. It passes 13 of the 39 cases and exits
+1. The 13 passing cases test invalid input. They need no completed module: the
+stubs return failure as required.
 
-Record both partners' names and GitHub accounts in `ANALYSIS.md`. The instructor assigns pairs at random. Keep commits that show each partner's work. Both partners must explain the queue invariant and one trace.
+The other 26 cases need `src/counter.c`, `src/buffer.c`, and `src/deadlock.c`.
+The workflow in the Actions tab is red for the same reason. That state is
+correct for a starter. Your fork passes after you implement the three files.
 
-## TODOs
+Enable workflows in the Actions tab after you fork the repository. GitHub
+disables them on forks. The workflow run is part of the submission.
 
-Each TODO block states one implementation task. Preserve the fixed interface in `include/ps3.h`. Implement queue operations under the mutex. Don't treat a racy counter result as a required output.
+## Hosts
+
+### Linux
+
+```bash
+sudo apt update
+sudo apt install -y build-essential make python3
+```
+
+### macOS
+
+The Xcode command line tools carry the compiler and `make`.
+
+```bash
+xcode-select --install
+```
+
+Check the Python 3 version. macOS ships Python 3 with the command line tools.
+
+```bash
+python3 --version
+```
+
+The semaphore implementation uses named POSIX semaphores on macOS. The
+interface keeps that platform choice inside `src/buffer.c`.
+
+### Windows through WSL2 Ubuntu
+
+Install WSL2 with Ubuntu from PowerShell.
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Open the Ubuntu terminal and install the tools inside it.
+
+```bash
+sudo apt update
+sudo apt install -y build-essential make python3
+```
+
+Work in the Ubuntu file system under your home directory. A checkout under
+`/mnt/c` works but it is slower, and file permissions there behave differently.
+
+### Check
+
+```bash
+cc --version
+make --version
+python3 --version
+```
+
+## The Corpus
+
+The 39 cases under `cases/` are the cases the instructor grades with. Each
+`.case` file holds one workload and its limits. A valid case has an `.out` file
+with the exact expected output. An invalid case also has `.err` and `.status`
+files.
+
+The runner compares standard output, standard error, and the exit status of
+every case byte for byte. It stops a case after 15 seconds. A valid case
+requires exit code zero and empty standard error.
+
+Several cases apply the same producer and consumer workload to both queue
+implementations. Their exact counts and sums are comparable under identical
+inputs.
+
+The one case your pair writes lives under `student-cases/`. That folder holds a
+short README and an example in the same form. Run it with
+`./check.sh student-cases`.
+
