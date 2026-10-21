@@ -84,7 +84,9 @@ failure as required.
 
 The other 26 cases need `src/counter.c`, `src/buffer.c`, and `src/deadlock.c`.
 The workflow in the Actions tab is red for the same reason. That state is
-correct for a starter. Your fork passes after you implement the three files.
+correct for a starter. Your fork passes after you implement the three files. A
+complete submission reports `39/39 cases passed` and `5/5 invariant checks
+passed`, then exits 0.
 
 Enable workflows in the Actions tab after you fork the repository. GitHub
 disables them on forks. The workflow run is part of the submission.
