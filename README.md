@@ -163,4 +163,3 @@ short README and an example in the same form. Run it with
 `check.sh` runs the five invariant checks after the public cases. They cover the
 two paper traces, the counter stress run, and both lock-order results. The
 checks are part of the same command, so no hidden suite exists.
-
