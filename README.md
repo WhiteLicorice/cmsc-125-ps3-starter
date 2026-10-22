@@ -117,7 +117,7 @@ python3 --version
 The semaphore implementation uses named POSIX semaphores on macOS. The
 interface keeps that platform choice inside `src/buffer.c`.
 
-### Windows through WSL2 Ubuntu
+### Windows Through WSL2 Ubuntu
 
 Install WSL2 with Ubuntu from PowerShell.
 
@@ -133,7 +133,7 @@ sudo apt install -y build-essential make python3
 ```
 
 Work in the Ubuntu file system under your home directory. A checkout under
-`/mnt/c` works but it is slower, and file permissions there behave differently.
+`/mnt/c` works but it's slower, and file permissions there behave differently.
 
 ### Check
 
