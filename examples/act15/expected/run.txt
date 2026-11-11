@@ -1,0 +1,4 @@
+A holds L1 and waits for L2
+B holds L2 and waits for L1
+cycle: A -> L2 -> B -> L1 -> A
+prevention: acquire L1 before L2

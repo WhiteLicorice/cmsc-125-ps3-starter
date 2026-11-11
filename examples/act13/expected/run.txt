@@ -1,0 +1,1 @@
+consumed=42 full=0

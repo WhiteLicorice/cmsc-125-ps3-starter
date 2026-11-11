@@ -1,0 +1,1 @@
+shared=3 private=1,2 joined=yes
