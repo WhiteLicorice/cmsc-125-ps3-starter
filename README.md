@@ -9,11 +9,11 @@ thread. This README gives the repository map, the commands, the starting state,
 and the three host routes.
 
 This project runs on Linux, on macOS, and on Windows through WSL2 Ubuntu. It
-uses POSIX threads and, on macOS, named POSIX semaphores.
+uses POSIX threads and named POSIX semaphores on every platform.
 
 ## Pair
 
-Enter two names below. An assigned trio adds one entry.
+Enter two names below.
 
 - Full Name (`@github-username`)
 - Full Name (`@github-username`)
@@ -42,6 +42,7 @@ src/counter.c         yours: the shared counter and the lost-update measurement
 src/buffer.c          yours: the bounded queue, the condition variable, the semaphores
 src/deadlock.c        yours: the lock-order graph cycle search
 cases/                the complete public corpus
+examples/             one worked example per Unit 2 subtopic
 student-cases/        the one boundary or failure case of your own
 tools/check_cases.py  the runner that grades the corpus
 ANALYSIS.md           the joint analysis that you create
@@ -114,8 +115,8 @@ Check the Python 3 version. macOS ships Python 3 with the command line tools.
 python3 --version
 ```
 
-The semaphore implementation uses named POSIX semaphores on macOS. The
-interface keeps that platform choice inside `src/buffer.c`.
+The semaphore implementation uses named POSIX semaphores on every platform.
+The interface keeps that choice inside `src/buffer.c`.
 
 ### Windows Through WSL2 Ubuntu
 
