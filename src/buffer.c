@@ -100,7 +100,7 @@ static void *produce(void *data)
 static void *consume(void *data)
 {
     struct consumer_arg *arg = data;
-    /* TODO: Remove items until this consumer receives the stop sentinel. */
+    /* TODO: Remove items until this consumer receives the stop marker. */
     /* TODO: Add each ordinary item to this consumer's count. */
     /* TODO: Add each ordinary item to this consumer's sum. */
     /* TODO: Preserve an error result when a dequeue fails. */
@@ -133,8 +133,8 @@ int run_queue(enum queue_kind kind, int producers, int consumers,
     /* TODO: Store each producer's range identifier in its argument. */
     /* TODO: Store each producer's item count in its argument. */
     /* TODO: Start producers only after all consumers start. */
-    /* TODO: Join every producer before sending any stop sentinel. */
-    /* TODO: Send one stop sentinel for each consumer that started. */
+    /* TODO: Join every producer before sending any stop marker. */
+    /* TODO: Send one stop marker for each consumer that started. */
     /* TODO: Join every consumer that started. */
     /* TODO: Combine the completed consumers' counts and sums. */
     /* TODO: Store the combined results through the output pointers. */
