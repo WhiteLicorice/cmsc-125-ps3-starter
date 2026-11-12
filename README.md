@@ -13,7 +13,7 @@ uses POSIX threads and named POSIX semaphores on every platform.
 
 ## Pair
 
-Enter two names below.
+Enter two names below. An assigned trio adds one entry.
 
 - Full Name (`@github-username`)
 - Full Name (`@github-username`)
@@ -65,7 +65,8 @@ make clean                # remove the build directory
 
 `check.sh` is the complete public automated check. No hidden suite exists. Read
 `tools/check_cases.py` before you trust a green run. The rubric separately
-assesses the joint analysis and the collaboration history.
+assesses Implementation Correctness, Structure and Synchronization, Joint
+Analysis, and Collaboration.
 
 ## Exit Codes
 
