@@ -40,7 +40,7 @@ corpus and its runner. The manual states every rule these files follow.
 include/ps3.h         fixed interface: limits, structures, prototypes
 src/main.c            complete: the case reader, the command line, the exit codes
 src/counter.c         yours: the mutex-protected shared counter
-src/buffer.c          yours: the bounded queue, the condition variable, the semaphores
+src/buffer.c          yours: the bounded queue, the two condition variables, the semaphores
 src/deadlock.c        yours: the lock-order graph cycle search
 cases/                the complete public corpus
 examples/             one worked example per Unit 2 subtopic

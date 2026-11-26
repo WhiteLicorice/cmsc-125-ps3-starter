@@ -1,11 +1,12 @@
 #include "ps3.h"
 
-static int visit(int node, int lock_count, int graph[64][64],
+static int visit(int node, int lock_count, int graph[64][64], int degree[64],
                  int color[64])
 {
     (void)node;
     (void)lock_count;
     (void)graph;
+    (void)degree;
     (void)color;
     /* TODO: Mark the current lock gray before searching its edges. */
     /* TODO: Inspect each possible outgoing lock-order edge. */
@@ -26,6 +27,7 @@ int lock_graph_has_cycle(int lock_count, const int (*edges)[2], int edge_count)
     /* TODO: Require edge counts within the public range. */
     /* TODO: Fail when edges exist without an edge array. */
     int graph[64][64];
+    int degree[64];
     int color[64];
     /* TODO: Reset every adjacency-list length before adding supplied edges. */
     /* TODO: Reset every depth-first color to white before graph scanning. */
@@ -38,6 +40,7 @@ int lock_graph_has_cycle(int lock_count, const int (*edges)[2], int edge_count)
     /* TODO: Return one for a cycle and zero when no cycle exists. */
     /* TODO: Return failure for invalid graph input. */
     (void)graph;
+    (void)degree;
     (void)color;
     (void)visit;
     return -1;
