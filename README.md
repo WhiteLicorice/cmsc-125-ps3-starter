@@ -2,11 +2,11 @@
 # CMSC 125 Problem Set 3 Starter
 
 This C17 project is the starter for the CMSC 125 Problem Set 3 concurrent
-queue and lock-order graph. A counter measures lost updates. A bounded queue
-carries items between producers and consumers through a condition variable or
-POSIX semaphores. A lock-order graph reports whether a cycle can stop every
-thread. This README gives the repository map, the commands, the starting state,
-and the three host routes.
+queue and lock-order graph. A mutex-protected counter sums concurrent
+increments. A bounded queue carries items between producers and consumers
+through a condition variable or POSIX semaphores. A lock-order graph reports
+whether a cycle can stop every thread. This README gives the repository map,
+the commands, the starting state, and the three host routes.
 
 This project runs on Linux, on macOS, and on Windows through WSL2 Ubuntu. It
 uses POSIX threads and named POSIX semaphores on every platform.
@@ -38,7 +38,7 @@ corpus and its runner. The manual states every rule these files follow.
 ```
 include/ps3.h         fixed interface: limits, structures, prototypes
 src/main.c            complete: the case reader, the command line, the exit codes
-src/counter.c         yours: the shared counter and the lost-update measurement
+src/counter.c         yours: the mutex-protected shared counter
 src/buffer.c          yours: the bounded queue, the condition variable, the semaphores
 src/deadlock.c        yours: the lock-order graph cycle search
 cases/                the complete public corpus
