@@ -4,7 +4,7 @@
 This C17 project is the starter for the CMSC 125 Problem Set 3 concurrent
 queue and lock-order graph. A mutex-protected counter sums concurrent
 increments. A bounded queue carries items between producers and consumers
-through a condition variable or POSIX semaphores. The lock-order search finds
+through two condition variables or POSIX semaphores. The lock-order search finds
 cycles in the supplied graph. A cycle shows a possible deadlock among the
 threads that take those locks. This README gives the repository map,
 the commands, the starting state, and the three host routes.
