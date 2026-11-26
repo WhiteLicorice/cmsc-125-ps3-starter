@@ -4,8 +4,9 @@
 This C17 project is the starter for the CMSC 125 Problem Set 3 concurrent
 queue and lock-order graph. A mutex-protected counter sums concurrent
 increments. A bounded queue carries items between producers and consumers
-through a condition variable or POSIX semaphores. A lock-order graph reports
-whether a cycle can stop every thread. This README gives the repository map,
+through a condition variable or POSIX semaphores. The lock-order search finds
+cycles in the supplied graph. A cycle shows a possible deadlock among the
+threads that take those locks. This README gives the repository map,
 the commands, the starting state, and the three host routes.
 
 This project runs on Linux, on macOS, and on Windows through WSL2 Ubuntu. It
@@ -45,6 +46,7 @@ cases/                the complete public corpus
 examples/             one worked example per Unit 2 subtopic
 student-cases/        the one boundary or failure case of your own
 tools/check_cases.py  the runner that grades the corpus
+tools/check_invariants.py  invariant checker that check.sh runs
 ANALYSIS.md           the joint analysis that you create
 Makefile run check.sh  the run contract
 ```
@@ -72,9 +74,9 @@ Analysis, and Collaboration.
 
 | Code | Meaning |
 |---|---|
-| 0 | The case ran and every check in it passed. |
-| 1 | A case check failed, or the case content was refused. |
-| 2 | The command line or the case file path was refused. |
+| 0 | The case ran and every check in it passed, or a `counter` run printed its total. |
+| 1 | A case check failed, the case content was refused, or the counter run failed. |
+| 2 | The command line, the case file path, or a `counter` argument was refused. |
 
 ## The First Run
 
