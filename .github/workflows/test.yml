@@ -2,12 +2,12 @@ name: ps3-checks
 on: [push]
 
 # This workflow is red before the work is done, and that is the correct
-# starting state. The starter ships three unimplemented modules, so it passes
-# 13 of the 39 published cases, reports 2 of 5 invariant checks, and exits 1. The passing 13 are the invalid-input
-# cases, which the failure stubs answer correctly.
+# starting state. The starter ships three unimplemented modules, so it reports
+# `14/40 cases passed`, 2 of 5 invariant checks, and exits 1. The 14 passing
+# cases are invalid-input refusals, which the failure stubs answer correctly.
 #
-# The workflow must be green on the commit you submit. That commit holds one
-# author's work and one partner's work, and the run belongs to both.
+# The workflow must be green on the commit you submit. That commit holds
+# every group member's work, and the run belongs to the whole group.
 
 jobs:
   test:
