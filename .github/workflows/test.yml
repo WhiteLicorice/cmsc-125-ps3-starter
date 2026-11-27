@@ -6,8 +6,8 @@ on: [push]
 # `14/40 cases passed`, 2 of 5 invariant checks, and exits 1. The 14 passing
 # cases are invalid-input refusals, which the failure stubs answer correctly.
 #
-# The workflow must be green on the commit you submit. That commit holds one
-# author's work and one partner's work, and the run belongs to both.
+# The workflow must be green on the commit you submit. That commit holds
+# every group member's work, and the run belongs to the whole group.
 
 jobs:
   test:

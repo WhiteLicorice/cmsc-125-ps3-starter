@@ -174,7 +174,7 @@ Several cases apply the same producer and consumer workload to both queue
 implementations. Their exact counts and sums are comparable under identical
 inputs.
 
-The one case your pair writes lives under `student-cases/`. That folder holds a
+The one case your group writes lives under `student-cases/`. That folder holds a
 short README and an example in the same form. Run it with
 `./check.sh student-cases`.
 
