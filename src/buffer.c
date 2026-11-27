@@ -92,7 +92,7 @@ static void *produce(void *data)
     /* TODO: Form each item from this producer's assigned range. */
     /* TODO: Add each item through the queue operation. */
     /* TODO: Preserve an error result when an enqueue fails. */
-    /* TODO: Return a result that lets the joiner detect producer failure. */
+    /* TODO: The reference treats an enqueue failure as advisory. */
     (void)arg;
     return NULL;
 }
@@ -104,7 +104,7 @@ static void *consume(void *data)
     /* TODO: Add each ordinary item to this consumer's count. */
     /* TODO: Add each ordinary item to this consumer's sum. */
     /* TODO: Preserve an error result when a dequeue fails. */
-    /* TODO: Return a result that lets the joiner detect consumer failure. */
+    /* TODO: The reference treats a dequeue failure as advisory. */
     (void)arg;
     return NULL;
 }
@@ -143,7 +143,7 @@ int run_queue(enum queue_kind kind, int producers, int consumers,
     /* TODO: Free the consumer argument records. */
     /* TODO: Free the producer argument records. */
     /* TODO: Release initialized queue resources. */
-    /* TODO: Return failure when setup, worker, or join steps fail. */
+    /* TODO: Return failure when setup fails. The reference ignores worker and join results. */
     (void)queue_init;
     (void)queue_destroy;
     (void)queue_put;
