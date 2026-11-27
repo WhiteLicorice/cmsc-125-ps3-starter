@@ -3,6 +3,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
+static int at_end_of_input(FILE *input)
+{
+    int ch;
+    while ((ch = fgetc(input)) != EOF) {
+        if (!isspace((unsigned char)ch))
+            return 0;
+    }
+    return 1;
+}
 
 static int run_case(FILE *input)
 {
@@ -15,6 +26,8 @@ static int run_case(FILE *input)
         long total = 0;
         if (fscanf(input, "%d %d", &workers, &increments) != 2 ||
             run_counter(workers, increments, &total) != 0)
+            return 1;
+        if (!at_end_of_input(input))
             return 1;
         printf("counter total=%ld\n", total);
         return 0;
@@ -40,6 +53,8 @@ static int run_case(FILE *input)
         if (run_queue(queue_kind, producers, consumers, items,
                       capacity, &items_consumed, &sum) != 0)
             return 1;
+        if (!at_end_of_input(input))
+            return 1;
         printf("queue kind=%s items=%d sum=%ld\n", mode,
                items_consumed, sum);
         return 0;
@@ -59,6 +74,8 @@ static int run_case(FILE *input)
                                          (const int (*)[2])edges,
                                          edge_count);
         if (cycle < 0)
+            return 1;
+        if (!at_end_of_input(input))
             return 1;
         printf("lock-order cycle=%s\n", cycle ? "yes" : "no");
         return 0;

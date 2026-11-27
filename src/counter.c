@@ -47,14 +47,14 @@ int run_counter(int workers, int increments, long *total)
     /* TODO: Record how many worker threads started. */
     /* TODO: Stop creating workers after the first creation error. */
     /* TODO: Join every worker that started. */
-    /* TODO: Record a join error without skipping later joins. */
+    /* TODO: Join every worker that started. A join result does not stop later joins. */
     /* TODO: Lock the mutex before reading the final shared total. */
     /* TODO: Copy the protected total to the caller's output. */
     /* TODO: Unlock the mutex after copying the result. */
     /* TODO: Destroy the mutex after every worker has joined. */
     /* TODO: Free the worker argument records. */
     /* TODO: Free the thread handle array. */
-    /* TODO: Return failure when setup, creation, or joining failed. */
+    /* TODO: Return failure when setup or creation fails. The reference ignores a join result. */
     (void)count_work;
     return -1;
 }
