@@ -30,14 +30,14 @@ You may change only these files and folders:
 - The Pair section of `README.md`
 - `student-cases/`, which holds the one case of your own
 
-Everything else is fixed. `include/ps3.h` and `src/main.c` are given to you
+Everything else is fixed. The starter gives you `include/ps3.h` and `src/main.c`
 complete. `cases/`, `tools/check_cases.py`, and the workflow are the grading
 corpus and its runner. The manual states every rule these files follow.
 
 ## Layout
 
 ```
-include/ps3.h         fixed interface: limits, structures, prototypes
+include/ps3.h         fixed interface: structures, prototypes
 src/main.c            complete: the case reader, the command line, the exit codes
 src/counter.c         yours: the mutex-protected shared counter
 src/buffer.c          yours: the bounded queue, the two condition variables, the semaphores
@@ -47,6 +47,8 @@ examples/             one worked example per Unit 2 subtopic
 student-cases/        the one boundary or failure case of your own
 tools/check_cases.py  the runner that grades the corpus
 tools/check_invariants.py  invariant checker that check.sh runs
+tools/trace_model.py  the paper-trace model the invariants run
+tools/traces/         the paper traces the invariants run
 ANALYSIS.md           the joint analysis that you create
 Makefile run check.sh  the run contract
 ```

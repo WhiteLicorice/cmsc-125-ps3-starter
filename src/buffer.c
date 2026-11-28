@@ -6,6 +6,7 @@ struct producer_arg {
     struct work_queue *queue;
     int id;
     int item_count;
+    int failed;
 };
 
 struct consumer_arg {
@@ -92,8 +93,7 @@ static void *produce(void *data)
     /* TODO: Form each item from this producer's assigned range. */
     /* TODO: Add each item through the queue operation. */
     /* TODO: Preserve an error result when an enqueue fails. */
-    /* TODO: Mark the run failed when an enqueue fails. The reference sets
-       failed and stops this producer. */
+    /* TODO: Set failed and stop this producer when an enqueue fails. */
     (void)arg;
     return NULL;
 }
@@ -104,8 +104,7 @@ static void *consume(void *data)
     /* TODO: Remove items until this consumer receives the stop marker. */
     /* TODO: Add each ordinary item to this consumer's count. */
     /* TODO: Add each ordinary item to this consumer's sum. */
-    /* TODO: Stop this consumer when a dequeue fails. The reference records
-       no result for it. */
+    /* TODO: Stop this consumer when a dequeue fails. */
     (void)arg;
     return NULL;
 }
@@ -144,9 +143,8 @@ int run_queue(enum queue_kind kind, int producers, int consumers,
     /* TODO: Free the consumer argument records. */
     /* TODO: Free the producer argument records. */
     /* TODO: Release initialized queue resources. */
-    /* TODO: Return failure when setup fails. The reference returns -1 when
-       a producer marked the run failed. It does not check the join or
-       stop-marker results. */
+    /* TODO: Return failure when setup fails or a producer failed. Record a
+       join error and keep joining the other workers. */
     (void)queue_init;
     (void)queue_destroy;
     (void)queue_put;

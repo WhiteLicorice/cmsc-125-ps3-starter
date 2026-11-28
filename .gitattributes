@@ -1,6 +1,6 @@
 * text=auto
 
-# The shell scripts run under bash on every platform, so they stay LF.
+# The shell scripts run under sh on every platform, so they stay LF.
 run text eol=lf
 check.sh text eol=lf
 
