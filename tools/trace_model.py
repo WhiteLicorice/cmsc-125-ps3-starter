@@ -8,20 +8,27 @@ import sys
 def run_trace(path: Path) -> tuple[int, str]:
     shared = 0
     registers = [None, None]
-    actions = [line.split() for line in path.read_text(encoding="utf-8").splitlines()
-               if line.strip() and not line.strip().startswith("#")]
-    locked = any(len(parts) == 2 and parts[1] == "LOCK" for parts in actions)
+    actions = []
+    for number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), 1):
+        text = line.strip()
+        if text and not text.startswith("#"):
+            actions.append((number, text.split()))
+    locked = any(len(parts) == 2 and parts[1] == "LOCK"
+                 for _, parts in actions)
     sequence = ["LOCK", "LOAD", "ADD", "STORE", "UNLOCK"] if locked else [
         "LOAD", "ADD", "STORE"
     ]
     next_action = [0, 0]
     owner = None
-    for number, parts in enumerate(actions, 1):
+    for number, parts in actions:
         if len(parts) != 2 or parts[0] not in ("T0", "T1"):
             return 1, f"line {number}: expected T0|T1 LOCK|LOAD|ADD|STORE|UNLOCK"
         thread = int(parts[0][1])
         action = parts[1]
-        expected = sequence[next_action[thread]] if next_action[thread] < len(sequence) else "DONE"
+        if next_action[thread] >= len(sequence):
+            return 1, f"line {number}: {parts[0]} acted after it completed"
+        expected = sequence[next_action[thread]]
         if action != expected:
             return 1, f"line {number}: {parts[0]} expected {expected}"
         if locked and action == "LOCK":
