@@ -63,8 +63,8 @@ def main() -> int:
         failures.append(f"acyclic lock order {problem}")
     elif safe_output.returncode != 0 or safe_output.stdout != "lock-order cycle=no\n":
         failures.append("acyclic lock order was rejected")
-    empty = root / "cases" / "deadlock-cycle.case"
-    cycle_output, problem = run_bounded([str(root / "run"), str(empty)])
+    cycle = root / "cases" / "deadlock-cycle.case"
+    cycle_output, problem = run_bounded([str(root / "run"), str(cycle)])
     checks += 1
     if problem:
         failures.append(f"cyclic lock order {problem}")
