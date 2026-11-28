@@ -75,8 +75,8 @@ Analysis, and Collaboration.
 | Code | Meaning |
 |---|---|
 | 0 | The case ran and every check in it passed, or a `counter` run printed its total. |
-| 1 | A case check failed, the case content was refused, or the counter run failed. |
-| 2 | The command line, the case file path, or a `counter` argument was refused. |
+| 1 | A case check failed, the program refused the case content, or the counter run failed. |
+| 2 | The program refused the command line, the case file path, or a `counter` argument. |
 
 ## The First Run
 

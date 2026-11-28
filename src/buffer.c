@@ -104,8 +104,8 @@ static void *consume(void *data)
     /* TODO: Remove items until this consumer receives the stop marker. */
     /* TODO: Add each ordinary item to this consumer's count. */
     /* TODO: Add each ordinary item to this consumer's sum. */
-    /* TODO: Preserve an error result when a dequeue fails. */
-    /* TODO: The reference treats a dequeue failure as advisory. */
+    /* TODO: Stop this consumer when a dequeue fails. The reference records
+       no result for it. */
     (void)arg;
     return NULL;
 }
