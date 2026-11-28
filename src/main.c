@@ -1,5 +1,7 @@
 #include "ps3.h"
 
+#include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +17,38 @@ static int at_end_of_input(FILE *input)
     return 1;
 }
 
+static int parse_long(const char *text, long *out)
+{
+    char *end;
+    long value;
+
+    errno = 0;
+    value = strtol(text, &end, 10);
+    if (errno != 0 || end == text || *end != '\0')
+        return -1;
+    *out = value;
+    return 0;
+}
+
+static int read_long(FILE *input, long *out)
+{
+    char text[32];
+
+    if (fscanf(input, "%31s", text) != 1)
+        return -1;
+    return parse_long(text, out);
+}
+
+static int read_int(FILE *input, long low, long high, int *out)
+{
+    long value;
+
+    if (read_long(input, &value) != 0 || value < low || value > high)
+        return -1;
+    *out = (int)value;
+    return 0;
+}
+
 static int run_case(FILE *input)
 {
     char kind[24];
@@ -24,7 +58,8 @@ static int run_case(FILE *input)
         int workers;
         int increments;
         long total = 0;
-        if (fscanf(input, "%d %d", &workers, &increments) != 2)
+        if (read_int(input, 1, 256, &workers) != 0 ||
+            read_int(input, 1, 10000000, &increments) != 0)
             return 1;
         if (!at_end_of_input(input))
             return 1;
@@ -42,8 +77,12 @@ static int run_case(FILE *input)
         int items_consumed = 0;
         long sum = 0;
         enum queue_kind queue_kind;
-        if (fscanf(input, "%23s %d %d %d %d", mode, &producers,
-                   &consumers, &items, &capacity) != 5)
+        if (fscanf(input, "%23s", mode) != 1)
+            return 1;
+        if (read_int(input, 1, 64, &producers) != 0 ||
+            read_int(input, 1, 64, &consumers) != 0 ||
+            read_int(input, 0, 100000, &items) != 0 ||
+            read_int(input, 1, 256, &capacity) != 0)
             return 1;
         if (strcmp(mode, "condvar") == 0)
             queue_kind = QUEUE_CONDVAR;
@@ -64,12 +103,20 @@ static int run_case(FILE *input)
         int locks;
         int edge_count;
         int edges[64][2];
-        if (fscanf(input, "%d %d", &locks, &edge_count) != 2 ||
-            locks < 1 || locks > 64 || edge_count < 0 || edge_count > 64)
+        if (read_int(input, 1, 64, &locks) != 0 ||
+            read_int(input, 0, 64, &edge_count) != 0)
             return 1;
         for (int i = 0; i < edge_count; ++i) {
-            if (fscanf(input, "%d %d", &edges[i][0], &edges[i][1]) != 2)
+            long from;
+            long to;
+            if (read_long(input, &from) != 0 ||
+                read_long(input, &to) != 0)
                 return 1;
+            if (from < INT_MIN || from > INT_MAX ||
+                to < INT_MIN || to > INT_MAX)
+                return 1;
+            edges[i][0] = (int)from;
+            edges[i][1] = (int)to;
         }
         if (!at_end_of_input(input))
             return 1;

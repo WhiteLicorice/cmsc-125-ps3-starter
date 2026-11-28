@@ -82,16 +82,16 @@ Analysis, and Collaboration.
 
 ## The First Run
 
-A fresh clone builds without warnings. It reports `14/40 cases passed` and
+A fresh clone builds without warnings. It reports `17/43 cases passed` and
 exits 1. Two of the 5 invariant checks pass. Those two are the paper traces.
-The three program checks wait for your modules. All 14 passing cases are
+The three program checks wait for your modules. All 17 passing cases are
 invalid-input refusals. They need no completed module. The stubs return failure
 as required.
 
 The other 26 cases need `src/counter.c`, `src/buffer.c`, and `src/deadlock.c`.
 The workflow in the Actions tab is red for the same reason. That state is
 correct for a starter. Your fork passes after you implement the three files. A
-complete submission reports `40/40 cases passed` and `5/5 invariant checks
+complete submission reports `43/43 cases passed` and `5/5 invariant checks
 passed`, then exits 0.
 
 Enable workflows in the Actions tab after you fork the repository. GitHub
@@ -164,7 +164,7 @@ python3 --version
 
 ## The Corpus
 
-The 40 cases under `cases/` are the cases the instructor grades with. Each
+The 43 cases under `cases/` are the cases the instructor grades with. Each
 `.case` file holds one workload and its limits. A valid case has an `.out` file
 with the exact expected output. An invalid case also has `.err` and `.status`
 files.

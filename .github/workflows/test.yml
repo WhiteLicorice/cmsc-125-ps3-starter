@@ -3,7 +3,7 @@ on: [push]
 
 # This workflow is red before the work is done, and that is the correct
 # starting state. The starter ships three unimplemented modules, so it reports
-# `14/40 cases passed`, 2 of 5 invariant checks, and exits 1. The 14 passing
+# `17/43 cases passed`, 2 of 5 invariant checks, and exits 1. The 17 passing
 # cases are invalid-input refusals, which the failure stubs answer correctly.
 #
 # The workflow must be green on the commit you submit. That commit holds
