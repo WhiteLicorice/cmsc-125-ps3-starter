@@ -61,14 +61,14 @@ def main() -> int:
     checks += 1
     if problem:
         failures.append(f"acyclic lock order {problem}")
-    elif safe_output.stdout != "lock-order cycle=no\n":
+    elif safe_output.returncode != 0 or safe_output.stdout != "lock-order cycle=no\n":
         failures.append("acyclic lock order was rejected")
     empty = root / "cases" / "deadlock-cycle.case"
     cycle_output, problem = run_bounded([str(root / "run"), str(empty)])
     checks += 1
     if problem:
         failures.append(f"cyclic lock order {problem}")
-    elif cycle_output.stdout != "lock-order cycle=yes\n":
+    elif cycle_output.returncode != 0 or cycle_output.stdout != "lock-order cycle=yes\n":
         failures.append("cyclic lock order was missed")
     for failure in failures:
         print(f"FAIL {failure}")
