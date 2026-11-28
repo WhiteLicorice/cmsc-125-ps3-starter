@@ -24,10 +24,11 @@ static int run_case(FILE *input)
         int workers;
         int increments;
         long total = 0;
-        if (fscanf(input, "%d %d", &workers, &increments) != 2 ||
-            run_counter(workers, increments, &total) != 0)
+        if (fscanf(input, "%d %d", &workers, &increments) != 2)
             return 1;
         if (!at_end_of_input(input))
+            return 1;
+        if (run_counter(workers, increments, &total) != 0)
             return 1;
         printf("counter total=%ld\n", total);
         return 0;
@@ -50,10 +51,10 @@ static int run_case(FILE *input)
             queue_kind = QUEUE_SEMAPHORE;
         else
             return 1;
+        if (!at_end_of_input(input))
+            return 1;
         if (run_queue(queue_kind, producers, consumers, items,
                       capacity, &items_consumed, &sum) != 0)
-            return 1;
-        if (!at_end_of_input(input))
             return 1;
         printf("queue kind=%s items=%d sum=%ld\n", mode,
                items_consumed, sum);
@@ -70,12 +71,12 @@ static int run_case(FILE *input)
             if (fscanf(input, "%d %d", &edges[i][0], &edges[i][1]) != 2)
                 return 1;
         }
+        if (!at_end_of_input(input))
+            return 1;
         int cycle = lock_graph_has_cycle(locks,
                                          (const int (*)[2])edges,
                                          edge_count);
         if (cycle < 0)
-            return 1;
-        if (!at_end_of_input(input))
             return 1;
         printf("lock-order cycle=%s\n", cycle ? "yes" : "no");
         return 0;
