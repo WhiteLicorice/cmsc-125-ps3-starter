@@ -92,7 +92,8 @@ static void *produce(void *data)
     /* TODO: Form each item from this producer's assigned range. */
     /* TODO: Add each item through the queue operation. */
     /* TODO: Preserve an error result when an enqueue fails. */
-    /* TODO: The reference treats an enqueue failure as advisory. */
+    /* TODO: Mark the run failed when an enqueue fails. The reference sets
+       failed and stops this producer. */
     (void)arg;
     return NULL;
 }
@@ -143,7 +144,9 @@ int run_queue(enum queue_kind kind, int producers, int consumers,
     /* TODO: Free the consumer argument records. */
     /* TODO: Free the producer argument records. */
     /* TODO: Release initialized queue resources. */
-    /* TODO: Return failure when setup fails. The reference ignores worker and join results. */
+    /* TODO: Return failure when setup fails. The reference returns -1 when
+       a producer marked the run failed. It does not check the join or
+       stop-marker results. */
     (void)queue_init;
     (void)queue_destroy;
     (void)queue_put;
